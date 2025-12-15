@@ -11,8 +11,8 @@
         </div><div class="col-12 col-lg-auto mb-20">
             <h1 id="real-time-clock"></h1>
         </div></div><div class="row">
-        
-        </div><?php }else{
+
+        <?php }else{
             echo '<h1>Chào mừng '.$_SESSION['user1']['name'].' đến với trang làm việc của CinePass</h1>';
         } ?>
     </div></div><script>

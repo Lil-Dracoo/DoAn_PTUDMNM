@@ -4,6 +4,8 @@ session_start();
 // 1. INCLUDE MODELS (Load trước để dùng chung cho mọi trường hợp)
 include "./model/pdo.php";
 include "./model/taikhoan.php";
+include "./model/phim.php";
+
 
 
 // 2. XỬ LÝ ĐĂNG XUẤT (Ưu tiên xử lý đầu tiên)
@@ -24,6 +26,7 @@ if (isset($_SESSION['user1'])) {
 
     // Load dữ liệu cho Header
     $loadtk = loadall_taikhoan();
+    $loadphim = loadall_phim();
 
     // Include Header
     include "./view/home/header.php";
@@ -32,8 +35,10 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
-            
-
+            // --- MODULE PHIM ---
+            case "QLphim":
+                include "./controllers/c_phim.php";
+                break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
             case "login":
                 header('location: index.php?act=home');
