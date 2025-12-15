@@ -36,6 +36,7 @@ if (isset($_SESSION['user1'])) {
         switch ($act) {
             // --- MODULE LOẠI PHIM ---
             case "QLloaiphim":
+            case "themloai":
                 include "./controllers/c_loaiphim.php";
                 break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home

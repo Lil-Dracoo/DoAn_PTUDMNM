@@ -30,3 +30,7 @@ function phim_select_all()
     return pdo_query($sql);
 }
 
+function them_loaiphim($name){
+    $sql = "insert into `loaiphim`(`name`) values ('$name')";
+    pdo_execute($sql);
+}
