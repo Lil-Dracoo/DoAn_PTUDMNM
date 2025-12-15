@@ -135,3 +135,50 @@ function load_doanhthu_tuan(){
   $listtk = pdo_query($sql);
   return $listtk;
 }
+
+function load_doanhthu_ngay1(){
+    if(isset($_GET['trang'])){
+        $trang= $_GET['trang'];
+    }
+    else{
+        $trang = 1 ;
+    }   
+    $bghi=5;
+    $vitri = ($trang - 1)* $bghi;
+    $sql = "SELECT 
+        phim.id AS id, 
+        phim.tieu_de AS tieu_de, 
+        loaiphim.name AS ten_loaiphim, 
+        DATE(hoa_don.ngay_tt) AS ngay,
+        COUNT(ve.id) AS so_luong_ve_dat,
+        SUM(hoa_don.thanh_tien) AS sum_thanhtien
+    FROM 
+        phim INNER JOIN loaiphim ON loaiphim.id = phim.id_loai
+            INNER JOIN lichchieu ON phim.id = lichchieu.id_phim
+            INNER JOIN khung_gio_chieu ON lichchieu.id = khung_gio_chieu.id_lich_chieu
+            INNER JOIN ve ON ve.id_thoi_gian_chieu = khung_gio_chieu.id AND ve.trang_thai IN (1, 2,4)
+            INNER JOIN hoa_don ON hoa_don.id = ve.id_hd
+            GROUP BY phim.id, phim.tieu_de, loaiphim.name, DATE(hoa_don.ngay_tt)
+            ORDER BY phim.id DESC, ngay DESC LIMIT $vitri,$bghi;";
+    $listtk = pdo_query($sql);
+    return $listtk;
+}
+
+function load_doanhthu_ngay(){
+    $sql = "SELECT 
+        phim.id AS id, 
+        phim.tieu_de AS tieu_de, 
+        loaiphim.name AS ten_loaiphim, 
+        DATE(hoa_don.ngay_tt) AS ngay,
+        COUNT(ve.id) AS so_luong_ve_dat,
+        SUM(hoa_don.thanh_tien) AS sum_thanhtien
+    FROM phim INNER JOIN loaiphim ON loaiphim.id = phim.id_loai
+            INNER JOIN lichchieu ON phim.id = lichchieu.id_phim
+            INNER JOIN khung_gio_chieu ON lichchieu.id = khung_gio_chieu.id_lich_chieu
+            INNER JOIN ve ON ve.id_thoi_gian_chieu = khung_gio_chieu.id AND ve.trang_thai IN (1, 2,4)
+            INNER JOIN hoa_don ON hoa_don.id = ve.id_hd
+            GROUP BY phim.id, phim.tieu_de, loaiphim.name, DATE(hoa_don.ngay_tt)
+            ORDER BY phim.id DESC, ngay DESC;";
+    $listtk = pdo_query($sql);
+    return $listtk;
+}

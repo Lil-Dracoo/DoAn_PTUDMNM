@@ -14,5 +14,10 @@ switch ($act) {
         $dtt1 =  load_doanhthu_tuan();
         include "./view/doanhthu/DTtuan.php";
         break;
+    case "DTngay":
+        $dtt =  load_doanhthu_ngay1();
+        $dtt1 =  load_doanhthu_ngay();
+        include "./view/doanhthu/DTngay.php";
+        break;
 }
 ?>
