@@ -4,7 +4,7 @@ session_start();
 // 1. INCLUDE MODELS (Load trước để dùng chung cho mọi trường hợp)
 include "./model/pdo.php";
 include "./model/taikhoan.php";
-
+include "./model/thongke.php";
 
 // 2. XỬ LÝ ĐĂNG XUẤT (Ưu tiên xử lý đầu tiên)
 if (isset($_GET['act']) && $_GET['act'] == "dangxuat") {
@@ -32,8 +32,9 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
-            
-
+            case "DTdh":
+                include "./controllers/c_thongke.php";
+                break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
             case "login":
                 header('location: index.php?act=home');
