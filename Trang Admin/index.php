@@ -40,6 +40,7 @@ if (isset($_SESSION['user1'])) {
             // --- MODULE PHIM ---
             case "QLphim":
             case "themphim":
+            case "xoaphim":
                 include "./controllers/c_phim.php";
                 break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home

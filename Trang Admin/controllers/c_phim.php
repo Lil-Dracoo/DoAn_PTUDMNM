@@ -47,5 +47,13 @@ switch ($act) {
             include "./view/phim/them.php";
         }
         break;
+
+        case "xoaphim":
+        if (isset($_GET['idxoa'])) {
+            xoa_phim($_GET['idxoa']);
+            $loadphim = loadall_phim();
+            include "./view/phim/QLphim.php";
+        }
+        break;
 }
 ?>

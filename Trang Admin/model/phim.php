@@ -35,3 +35,8 @@ function them_phim($tieu_de, $daodien, $dienvien, $img, $mo_ta, $thoiluong, $quo
     $sql = "insert into `phim` (`tieu_de`,`daodien`,`dienvien`,`img`,`mo_ta`,`thoi_luong_phim`,`quoc_gia`,`gia_han_tuoi`,`date_phat_hanh`,`id_loai`,`link_trailer`) values ('$tieu_de','$daodien','$dienvien','$img','$mo_ta','$thoiluong','$quoc_gia','$gia_han_tuoi','$date','$id_loai','$link')";
     pdo_execute($sql);
 }
+function xoa_phim($id)
+{
+    $sql = "delete from phim where id=" . $id;
+    pdo_execute($sql);
+}
