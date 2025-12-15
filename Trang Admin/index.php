@@ -34,6 +34,7 @@ if (isset($_SESSION['user1'])) {
         switch ($act) {
             case "DTdh":
             case "DTthang":
+            case "DTtuan":
                 include "./controllers/c_thongke.php";
                 break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
