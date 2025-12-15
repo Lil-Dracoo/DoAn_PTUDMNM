@@ -34,3 +34,8 @@ function them_loaiphim($name){
     $sql = "insert into `loaiphim`(`name`) values ('$name')";
     pdo_execute($sql);
 }
+
+function xoa_loaiphim($id){
+    $sql = "delete from loaiphim where id=".$id;
+    pdo_execute($sql);
+}

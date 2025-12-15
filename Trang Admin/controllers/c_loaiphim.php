@@ -16,5 +16,14 @@ switch ($act) {
         }
         include "./view/loaiphim/them.php";
         break;
+    case "xoaloai":
+        if (isset($_GET['idxoa'])) {
+            xoa_loaiphim($_GET['idxoa']);
+            $loadloai = loadall_loaiphim();
+            include "./view/loaiphim/QLloaiphim.php";
+        } else {
+            include "./view/loaiphim/QLloaiphim.php";
+        }
+        break;
 }
 ?>
