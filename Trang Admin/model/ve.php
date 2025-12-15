@@ -34,3 +34,14 @@ function loadall_vephim1($searchName, $searchTieuDe,$searchid){
     $re = pdo_query($sql);
     return $re;
 }
+function update_vephim($id,$trang_thai){
+    $sql = "update ve set `trang_thai`='{$trang_thai}' where `ve`.`id`=" . $id;
+    pdo_execute($sql);
+}
+function capnhat_tt_ve(){
+    $sql = "UPDATE `ve`
+    INNER JOIN `lichchieu` ON `ve`.`id_ngay_chieu` = `lichchieu`.`id`
+    SET `ve`.`trang_thai` = 4
+    WHERE `lichchieu`.`ngay_chieu` <= NOW() AND `ve`.`trang_thai` = 1;";
+    pdo_execute($sql);
+}

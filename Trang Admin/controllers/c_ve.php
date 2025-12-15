@@ -21,6 +21,25 @@ switch ($act) {
         include "./view/vephim/sua.php";
         break;
 
+    case "updatevephim":
+        if (isset($_POST['capnhat'])) {
+            $id = $_POST['id'];
+            $trang_thai = $_POST['trang_thai'];
+            update_vephim($id, $trang_thai);
+        }
+        if (isset($_POST['tk']) && ($_POST['tk'])) {
+            $searchName = $_POST['ten'];
+            $searchTieuDe = $_POST['tieude'];
+            $searchid = $_POST['id_ve'];
+        } else {
+            $searchName = "";
+            $searchTieuDe = "";
+            $searchid = "";
+        }
+        $loadvephim = loadall_vephim1($searchName, $searchTieuDe, $searchid);
+        include "view/vephim/ve.php";
+        break;
+
     case "chitiethoadon":
         include "./view/vephim/chitiethoadon.php";
         break;
@@ -30,6 +49,21 @@ switch ($act) {
             $loadone_ve =  loadone_vephim($_GET['id']);
         }
         include "view/vephim/ct_ve.php";
+        break;
+
+    case "capnhat_tt_ve":
+        if (isset($_POST['tk']) && ($_POST['tk'])) {
+            $searchName = $_POST['ten'];
+            $searchTieuDe = $_POST['tieude'];
+        } else {
+            $searchName = "";
+            $searchTieuDe = "";
+        }
+        if (isset($_POST['capnhat'])) {
+            capnhat_tt_ve();
+        }
+        $loadvephim = loadall_vephim1($searchName, $searchTieuDe);
+        include "./view/user/QTvien.php"; 
         break;
 }
 ?>

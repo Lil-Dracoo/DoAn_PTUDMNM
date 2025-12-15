@@ -40,8 +40,10 @@ if (isset($_SESSION['user1'])) {
                 include "./view/vephim/ve.php";
                 break;
             case "suavephim":
+            case "updatevephim":
             case "chitiethoadon":
             case "ctve":
+            case "capnhat_tt_ve":
                 include "./controllers/c_ve.php";
                 break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
