@@ -4,7 +4,7 @@ session_start();
 // 1. INCLUDE MODELS (Load trước để dùng chung cho mọi trường hợp)
 include "./model/pdo.php";
 include "./model/taikhoan.php";
-
+include "./model/ve.php";
 
 // 2. XỬ LÝ ĐĂNG XUẤT (Ưu tiên xử lý đầu tiên)
 if (isset($_GET['act']) && $_GET['act'] == "dangxuat") {
@@ -32,8 +32,18 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
-            
-
+            case "ve":
+                $searchName = isset($_POST['ten']) ? $_POST['ten'] : "";
+                $searchTieuDe = isset($_POST['tieude']) ? $_POST['tieude'] : "";
+                $searchid = isset($_POST['id_ve']) ? $_POST['id_ve'] : "";
+                $loadvephim = loadall_vephim1($searchName, $searchTieuDe, $searchid);
+                include "./view/vephim/ve.php";
+                break;
+            case "suavephim":
+            case "chitiethoadon":
+            case "ctve":
+                include "./controllers/c_ve.php";
+                break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
             case "login":
                 header('location: index.php?act=home');
