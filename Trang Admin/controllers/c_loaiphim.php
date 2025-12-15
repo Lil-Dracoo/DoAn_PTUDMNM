@@ -25,5 +25,30 @@ switch ($act) {
             include "./view/loaiphim/QLloaiphim.php";
         }
         break;
+    case "sualoai":
+        if (isset($_GET['idsua'])) {
+            $loadone_loai = loadone_loaiphim($_GET['idsua']);
+        }
+        include "./view/loaiphim/sua.php";
+        break;
+    case "updateloai":
+        if (isset($_POST['capnhat'])) {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            if ($name == '') {
+                $error = "vui lòng điền đầy đủ thông tin";
+                $loadone_loai = loadone_loaiphim($id);
+                include "./view/loaiphim/sua.php";
+            } else {
+                update_loaiphim($id, $name);
+                $suatc = "SỬA THÀNH CÔNG";
+                $loadloai = loadall_loaiphim();
+                include "./view/loaiphim/QLloaiphim.php";
+            }
+        } else {
+            $loadloai = loadall_loaiphim();
+            include "./view/loaiphim/QLloaiphim.php";
+        }
+        break;
 }
 ?>

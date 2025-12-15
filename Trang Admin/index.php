@@ -38,6 +38,8 @@ if (isset($_SESSION['user1'])) {
             case "QLloaiphim":
             case "themloai":
             case "xoaloai":
+            case "sualoai":
+            case "updateloai":
                 include "./controllers/c_loaiphim.php";
                 break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
