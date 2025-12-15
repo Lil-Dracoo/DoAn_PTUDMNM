@@ -40,7 +40,7 @@ include "./view/home/sideheader.php";
 
                             // Kiểm tra nếu số lượng vé đặt không phải là 0
                             echo '<tr>
-                                               <td>'.$id.'</td>
+                                        <td>'.$id.'</td>
                                          <td>'.$tieu_de.'</td>
                                          <td>'.$ten_loaiphim.'</td>
                                          <td>'.$so_luong_ve_dat.'</td>

@@ -33,6 +33,7 @@ if (isset($_SESSION['user1'])) {
         $act = $_GET['act'];
         switch ($act) {
             case "DTdh":
+            case "DTthang":
                 include "./controllers/c_thongke.php";
                 break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
