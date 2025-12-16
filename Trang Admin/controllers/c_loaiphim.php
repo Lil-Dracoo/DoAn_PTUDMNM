@@ -17,14 +17,27 @@ switch ($act) {
         include "./view/loaiphim/them.php";
         break;
     case "xoaloai":
-        if (isset($_GET['idxoa'])) {
-            xoa_loaiphim($_GET['idxoa']);
-            $loadloai = loadall_loaiphim();
-            include "./view/loaiphim/QLloaiphim.php";
+    if (isset($_GET['idxoa']) && ($_GET['idxoa'] > 0)) {
+        $id = $_GET['idxoa'];
+
+        // 1. Gọi hàm đếm số lượng phim đang có
+        $so_luong_phim = check_so_luong_phim_trong_loai($id);
+
+        // 2. Logic kiểm tra
+        if ($so_luong_phim > 0) {
+            // Nếu > 0 tức là còn phim -> Báo lỗi và KHÔNG thực hiện lệnh xóa
+            $error = "Không thể xóa! Loại này đang chứa " . $so_luong_phim . " phim.";
         } else {
-            include "./view/loaiphim/QLloaiphim.php";
+            // Nếu = 0 tức là loại rỗng -> Cho phép xóa
+            xoa_loaiphim($id);
+            $suatc = "XÓA THÀNH CÔNG";
         }
-        break;
+    }
+    
+    // Load lại danh sách
+    $loadloai = loadall_loaiphim();
+    include "./view/loaiphim/QLloaiphim.php";
+    break;
     case "sualoai":
         if (isset($_GET['idsua'])) {
             $loadone_loai = loadone_loaiphim($_GET['idsua']);
