@@ -44,3 +44,13 @@ function update_loaiphim($id,$name){
     $sql = "update loaiphim set `name`='{$name}' where `loaiphim`.`id`=". $id;
     pdo_execute($sql);
 }
+function check_so_luong_phim_trong_loai($id_loai) {
+    // LƯU Ý QUAN TRỌNG: 
+    // Fen kiểm tra trong Database bảng 'phim', cột liên kết tên là 'id_loai' hay 'id_danhmuc' nhé.
+    // Sửa chữ 'id_loai' ở dòng dưới cho đúng tên cột trong bảng phim của fen.
+    $sql = "SELECT * FROM phim WHERE id_loai = " . $id_loai;
+    $ds_phim = pdo_query($sql);
+    
+    // Trả về số lượng phim đếm được
+    return count($ds_phim); 
+}
