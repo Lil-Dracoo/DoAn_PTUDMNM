@@ -67,6 +67,10 @@ if (isset($_SESSION['user1'])) {
             // --- MODULE SUẤT CHIẾU & THỜI GIAN ---
             case "QLsuatchieu":
             case "thoigian":
+            case "themlichchieu":
+            case "sualichchieu":
+            case "updatelichchieu":
+            case "xoalichchieu":
                 include "./controllers/c_suatchieu.php";
                 break;
             

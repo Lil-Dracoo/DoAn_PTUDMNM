@@ -16,6 +16,23 @@
 
             </div><!-- Page Headings End -->
            
+            <?php if(isset($suatc)&&($suatc)!= ""){
+        echo'<p  style="color: red; text-align: center;">' .$suatc. '</p>';
+    }
+    ?> 
+            <div class="col-12 mb-30"><div class="news-item">
+                <div class="content">
+                <div class="categories"><a href="index.php?act=themlichchieu" class="product">Thêm Suất Chiếu</a></div></div></div>
+                <?php if (!empty($thongbao)): ?>
+                    <div style=" margin-bottom: 15px;
+                                padding: 10px;
+                                border-radius: 5px;
+                                background-color: #fff3cd;
+                                color: #856404;
+                                border: 1px solid #ffeeba;">
+                            <?= $thongbao ?>
+                    </div>
+                <?php endif; ?>
                 <!--Order List Start-->
                 <div class="col-12">
                     <div class="table-responsive">
@@ -33,6 +50,8 @@
                             <tbody>
                                 <?php foreach ($loadlich as $lich){
                                     extract($lich);
+                                    $linksua = "index.php?act=sualichchieu&idsua=".$id;
+                                    $linkxoa= "index.php?act=xoalichchieu&idxoa=".$id;
                                     echo '<tr>
                                     <td>#'.$id.'</td>
                                     <td>'.$tieu_de.'</td>
@@ -41,8 +60,8 @@
                                  
                                     <td class="action h4">
                                         <div class="table-action-buttons">
-                                            <a class="edit button button-box button-xs button-info" ><i class="zmdi zmdi-edit"></i></a>
-                                            <a class="delete button button-box button-xs button-danger" ><i class="zmdi zmdi-delete"></i></a>
+                                            <a class="edit button button-box button-xs button-info" href="'.$linksua.'"><i class="zmdi zmdi-edit"></i></a>
+                                            <a class="delete button button-box button-xs button-danger" href="'.$linkxoa.'"onclick="return confirm(\'xóa ko\')"><i class="zmdi zmdi-delete"></i></a>
                                         </div>
                                     </td>
                                 </tr>';
