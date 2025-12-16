@@ -6,6 +6,7 @@ include "./model/pdo.php";
 include "./model/taikhoan.php";
 include "./model/loai_phim.php";
 include "./model/phim.php";
+include "./model/phong.php";
 
 
 // 2. XỬ LÝ ĐĂNG XUẤT (Ưu tiên xử lý đầu tiên)
@@ -53,6 +54,17 @@ if (isset($_SESSION['user1'])) {
             case "updateloai":
                 include "./controllers/c_loaiphim.php";
                 break;
+
+            // --- MODULE PHÒNG ---
+            case "phong":
+            case "themphong":
+            case "xoaphong":
+            case "suaphong":
+            case "updatephong":
+                include "./controllers/c_phong.php";
+                break;
+
+            
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
             case "login":
                 header('location: index.php?act=home');
