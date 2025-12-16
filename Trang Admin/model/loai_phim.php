@@ -1,3 +1,4 @@
+
 <?php
  function loadall_loaiphim(){
      $sql = "select * from loaiphim where 1 order by id asc";
@@ -44,3 +45,4 @@ function update_loaiphim($id,$name){
     $sql = "update loaiphim set `name`='{$name}' where `loaiphim`.`id`=". $id;
     pdo_execute($sql);
 }
+

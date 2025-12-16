@@ -5,6 +5,7 @@ session_start();
 include "./model/pdo.php";
 include "./model/taikhoan.php";
 include "./model/loai_phim.php";
+include "./model/phim.php";
 
 
 // 2. XỬ LÝ ĐĂNG XUẤT (Ưu tiên xử lý đầu tiên)
@@ -26,6 +27,7 @@ if (isset($_SESSION['user1'])) {
     // Load dữ liệu cho Header
     $loadtk = loadall_taikhoan();
     $loadloai = loadall_loaiphim();
+    $loadphim = loadall_phim();
 
     // Include Header
     include "./view/home/header.php";
@@ -34,6 +36,15 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
+            // --- MODULE PHIM ---
+            case "QLphim":
+            case "themphim":
+            case "xoaphim":
+            case "suaphim":
+            case "updatephim":
+            case "QLcarou":
+                include "./controllers/c_phim.php";
+                break;
             // --- MODULE LOẠI PHIM ---
             case "QLloaiphim":
             case "themloai":
