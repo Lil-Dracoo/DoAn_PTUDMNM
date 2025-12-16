@@ -18,5 +18,12 @@ switch ($act) {
         $loadphong = load_phong();
         include "./view/phong/them.php";
         break;
+    case "xoaphong":
+        if (isset($_GET['idxoa'])) {
+            xoa_phong($_GET['idxoa']);
+            $loadphong = load_phong();
+            include "./view/phong/phong.php";
+        }
+        break;
 }
 ?>

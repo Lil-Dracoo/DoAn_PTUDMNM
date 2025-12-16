@@ -20,3 +20,8 @@ function them_phong($name){
     $sql = "insert into `phongchieu`(`name`) values ('$name')";
     pdo_execute($sql);
 }
+function xoa_phong($id)
+{
+    $sql = "delete from phongchieu where id=" . $id;
+    pdo_execute($sql);
+}
