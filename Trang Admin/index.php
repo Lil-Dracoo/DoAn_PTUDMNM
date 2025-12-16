@@ -8,7 +8,6 @@ include "./model/loai_phim.php";
 include "./model/phim.php";
 
 
-
 // 2. XỬ LÝ ĐĂNG XUẤT (Ưu tiên xử lý đầu tiên)
 if (isset($_GET['act']) && $_GET['act'] == "dangxuat") {
     // Xóa session
@@ -45,6 +44,14 @@ if (isset($_SESSION['user1'])) {
             case "updatephim":
             case "QLcarou":
                 include "./controllers/c_phim.php";
+                break;
+            // --- MODULE LOẠI PHIM ---
+            case "QLloaiphim":
+            case "themloai":
+            case "xoaloai":
+            case "sualoai":
+            case "updateloai":
+                include "./controllers/c_loaiphim.php";
                 break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
             case "login":

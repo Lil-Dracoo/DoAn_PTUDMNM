@@ -40,3 +40,9 @@ function xoa_loaiphim($id){
     $sql = "delete from loaiphim where id=".$id;
     pdo_execute($sql);
 }
+
+function update_loaiphim($id,$name){
+    $sql = "update loaiphim set `name`='{$name}' where `loaiphim`.`id`=". $id;
+    pdo_execute($sql);
+}
+
