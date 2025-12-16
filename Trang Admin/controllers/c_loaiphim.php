@@ -44,6 +44,7 @@ switch ($act) {
         }
         include "./view/loaiphim/sua.php";
         break;
+
     case "updateloai":
         if (isset($_POST['capnhat'])) {
             $id = $_POST['id'];
