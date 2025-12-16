@@ -40,3 +40,36 @@ function xoa_phim($id)
     $sql = "delete from phim where id=" . $id;
     pdo_execute($sql);
 }
+
+function sua_phim($id, $tieu_de, $daodien, $dienvien, $img, $mo_ta, $thoi_luong, $quoc_gia, $gia_han_tuoi, $date, $id_loai) {
+    // Nếu có hình mới -> Cập nhật cả cột 'img'
+    if ($img != "") {
+        $sql = "UPDATE phim SET 
+                `tieu_de` = '$tieu_de',
+                `daodien` = '$daodien',
+                `dienvien` = '$dienvien',
+                `img` = '$img',
+                `mo_ta` = '$mo_ta',
+                `thoi_luong_phim` = '$thoi_luong',
+                `quoc_gia` = '$quoc_gia',
+                `gia_han_tuoi` = '$gia_han_tuoi',
+                `date_phat_hanh` = '$date',
+                `id_loai` = '$id_loai' 
+                WHERE id = " . $id;
+    } 
+    // Nếu không có hình mới -> Giữ nguyên hình cũ (không update cột img)
+    else {
+        $sql = "UPDATE phim SET 
+                `tieu_de` = '$tieu_de',
+                `daodien` = '$daodien',
+                `dienvien` = '$dienvien',
+                `mo_ta` = '$mo_ta',
+                `thoi_luong_phim` = '$thoiluong',
+                `quoc_gia` = '$quoc_gia',
+                `gia_han_tuoi` = '$gia_han_tuoi',
+                `date_phat_hanh` = '$date',
+                `id_loai` = '$id_loai' 
+                WHERE id = " . $id;
+    }
+    pdo_execute($sql);
+}

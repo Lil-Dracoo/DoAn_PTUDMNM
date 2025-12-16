@@ -55,5 +55,64 @@ switch ($act) {
             include "./view/phim/QLphim.php";
         }
         break;
+        case "suaphim":
+        if (isset($_GET['idsua'])) {
+            $loadone_phim = loadone_phim($_GET['idsua']);
+        }
+        include "./view/phim/sua.php";
+        break;
+
+        case "QLcarou":
+            include "./view/phim/sua.php";
+            break;
+
+        case "updatephim":
+    if (isset($_POST['capnhat'])) {
+        $id = $_POST['id'];
+        $tieu_de = $_POST['tieu_de'];
+        $daodien = $_POST['daodien'];
+        $dienvien = $_POST['dienvien'];
+        $quoc_gia = $_POST['quoc_gia'];
+        $gia_han_tuoi = $_POST['gia_han_tuoi'];
+        $thoi_luong = $_POST['thoiluong']; 
+        $date = $_POST['date']; 
+        $id_loai = $_POST['id_loai'];
+        $mo_ta = $_POST['mo_ta'];
+
+        // --- XỬ LÝ ẢNH ---
+        $img = $_FILES['anh']['name'];
+        if ($img != "") {
+            // Người dùng chọn ảnh mới
+            $target_dir = "assets/imgavt/";
+            $target_file = $target_dir . basename($_FILES['anh']['name']);
+            move_uploaded_file($_FILES['anh']['tmp_name'], $target_file);
+        } else {
+            // Người dùng không chọn ảnh -> Lấy tên ảnh cũ từ form
+            $img = $_POST['hinh_cu'];
+        }
+
+        // --- KIỂM TRA DỮ LIỆU ---
+        if ($tieu_de == '' || $daodien == '' || $id_loai == '') {
+            $error = "Vui lòng nhập đủ các thông tin bắt buộc!";
+            // Load lại thông tin cũ để sửa tiếp
+            $loadone_phim = loadone_phim($id);
+            include "./view/phim/sua.php";
+        } else {
+            // --- GỌI MODEL ---
+            // Thứ tự tham số PHẢI KHỚP với hàm bên Model
+            sua_phim($id, $tieu_de, $daodien, $dienvien, $img, $mo_ta, $thoi_luong, $quoc_gia, $gia_han_tuoi, $date, $id_loai);
+
+            $suatc = "Cập nhật thành công!";
+            // Load lại danh sách phim
+            $loadphim = loadall_phim();
+            include "./view/phim/QLphim.php";
+        }
+    } else {
+        // Nếu truy cập trực tiếp mà không bấm nút cập nhật -> Về danh sách
+        $loadphim = loadall_phim();
+        include "./view/phim/QLphim.php";
+    }
+    break;
+
 }
 ?>

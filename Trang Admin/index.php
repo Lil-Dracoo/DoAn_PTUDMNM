@@ -41,6 +41,9 @@ if (isset($_SESSION['user1'])) {
             case "QLphim":
             case "themphim":
             case "xoaphim":
+            case "suaphim":
+            case "updatephim":
+            case "QLcarou":
                 include "./controllers/c_phim.php";
                 break;
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
