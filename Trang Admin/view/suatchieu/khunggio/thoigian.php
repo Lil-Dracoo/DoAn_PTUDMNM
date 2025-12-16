@@ -15,7 +15,15 @@
                 </div><!-- Page Heading End -->
 
             </div><!-- Page Headings End -->
-            
+            <?php if(isset($suatc)&&($suatc)!= ""){
+        echo'<p  style="color: red; text-align: center;">' .$suatc. '</p>';
+    }
+    ?> 
+            <div class="col-12 mb-30">
+            <div class="news-item">
+                <div class="content">
+                <div class="categories"><a href="index.php?act=themthoigian" class="product">Thêm khung giờ chiếu</a></div></div></div>
+
                 <!--Order List Start-->
                 <div class="col-12">
                     <div class="table-responsive">
@@ -33,6 +41,8 @@
                             <tbody>
                                 <?php foreach ($loadkgc as $gio){
                                     extract($gio);
+                                    $linksua = "index.php?act=suathoigian&id=".$id;
+                                    $linkxoa = "index.php?act=xoathoigian&idxoa=".$id;
                                     echo '<tr>
                                     <td>#'.$id.'</td>
                                     <td>'.$gio['tieu_de'].'</td>
@@ -41,8 +51,8 @@
                                     <td>'.$thoi_gian_chieu.'</td>
                                     <td class="action h4">
                                         <div class="table-action-buttons">
-                                            <a class="edit button button-box button-xs button-info"><i class="zmdi zmdi-edit"></i></a>
-                                            <a class="delete button button-box button-xs button-danger"><i class="zmdi zmdi-delete"></i></a>
+                                            <a class="edit button button-box button-xs button-info" href="'.$linksua.'"><i class="zmdi zmdi-edit"></i></a>
+                                            <a class="delete button button-box button-xs button-danger" href="'.$linkxoa.'"><i class="zmdi zmdi-delete"></i></a>
                                         </div>
                                     </td>
                                 </tr>';

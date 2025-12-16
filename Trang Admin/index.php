@@ -71,6 +71,10 @@ if (isset($_SESSION['user1'])) {
             case "sualichchieu":
             case "updatelichchieu":
             case "xoalichchieu":
+            case "updatethoigian":
+            case "themthoigian":
+            case "suathoigian":
+            case "xoathoigian":
                 include "./controllers/c_suatchieu.php";
                 break;
             

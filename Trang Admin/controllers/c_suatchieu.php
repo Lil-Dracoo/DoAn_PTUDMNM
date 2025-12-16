@@ -67,5 +67,62 @@ switch ($act) {
         $loadlich = loadall_lichchieu();
         include "./view/suatchieu/lichchieu/QLsuatchieu.php";
         break;
+    case "updatethoigian":
+        $loadlc = loadall_lichchieu();
+        $loadphong = load_phong();
+        if (isset($_POST['capnhat'])) {
+            $id = $_POST['id'];
+            $id_lc = $_POST['id_lc'];
+            $id_phong = $_POST['id_phong'];
+            $thoi_gian_chieu = $_POST['tgc'];
+            sua_kgc($id, $id_lc, $id_phong, $thoi_gian_chieu);
+        }
+        $loadkgc = loadall_khunggiochieu();
+        include "./view/suatchieu/khunggio/thoigian.php";
+        break;
+
+    case "themthoigian":
+        $loadlc = loadall_lichchieu();
+        $loadphong = load_phong();
+        if (isset($_POST['them'])) {
+            $id_lc = $_POST['id_lc'];
+            $id_phong = $_POST['id_phong'];
+            $thoi_gian_chieu = $_POST['tgc'];
+            if ($id_lc == '' || $id_phong == '' || $thoi_gian_chieu == '') {
+                $error = "Vui lòng không để trống";
+            } 
+            else {
+                $is_trung = check_trung_lich($id_lc, $id_phong, $thoi_gian_chieu);
+                if ($is_trung > 0) {
+                    $error = "Lỗi: Phòng này đã có lịch chiếu vào khung giờ và ngày đã chọn!";
+                } 
+                else {
+                    them_kgc($id_lc, $id_phong, $thoi_gian_chieu);
+                    $suatc = "Thêm thành công";
+                }
+            }
+        }
+        $loadkgc = loadall_khunggiochieu();
+        include "./view/suatchieu/khunggio/them.php";
+        break;
+
+    case "suathoigian":
+        $loadlich = loadall_lichchieu();
+        $loadphong = load_phong();
+        if (isset($_GET['id']) && $_GET['id'] !== '') {
+            $kg = loadone_khung_gio_chieu((int)$_GET['id']);
+        } else {
+            $kg = null;
+        }
+        include "./view/suatchieu/khunggio/sua.php";
+        break;
+
+    case "xoathoigian":
+        if (isset($_GET['idxoa']) && ($_GET['idxoa'] > 0)) {
+            xoa_kgc($_GET['idxoa']);
+        }
+        $loadkgc = loadall_khunggiochieu();
+        include "./view/suatchieu/khunggio/thoigian.php";
+        break;
 }
 ?>
