@@ -25,3 +25,7 @@ function xoa_phong($id)
     $sql = "delete from phongchieu where id=" . $id;
     pdo_execute($sql);
 }
+function update_phong($id,$name){
+    $sql = "update phongchieu set `name`='{$name}' where `id`=". $id;
+    pdo_execute($sql);
+}

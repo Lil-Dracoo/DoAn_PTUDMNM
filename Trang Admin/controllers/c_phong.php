@@ -25,5 +25,31 @@ switch ($act) {
             include "./view/phong/phong.php";
         }
         break;
+    case "suaphong":
+        if (isset($_GET['ids'])) {
+            $loadphong1 = loadone_phong($_GET['ids']);
+        }
+        include "./view/phong/sua.php";
+        break;
+    case "updatephong":
+        $loadphong = load_phong();
+        if (isset($_POST['capnhat'])) {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            if ($id == '' || $name == '') {
+                $error = "vui lòng không để trống";
+                $loadphong1 = load_phong($id);
+                include "./view/phong/sua.php";
+            } else {
+                update_phong($id, $name);
+                $suatc = "sửa thành công";
+                $loadphong = load_phong();
+                include "./view/phong/phong.php";
+            }
+        } else {
+            $loadphong = load_phong();
+            include "./view/phong/phong.php";
+        }
+        break;
 }
 ?>

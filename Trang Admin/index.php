@@ -59,6 +59,8 @@ if (isset($_SESSION['user1'])) {
             case "phong":
             case "themphong":
             case "xoaphong":
+            case "suaphong":
+            case "updatephong":
                 include "./controllers/c_phong.php";
                 break;
 
