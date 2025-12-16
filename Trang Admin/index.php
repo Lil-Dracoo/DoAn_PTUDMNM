@@ -57,6 +57,7 @@ if (isset($_SESSION['user1'])) {
 
             // --- MODULE PHÒNG ---
             case "phong":
+            case "themphong":
                 include "./controllers/c_phong.php";
                 break;
 

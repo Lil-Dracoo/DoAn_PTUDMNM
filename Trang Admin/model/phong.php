@@ -16,3 +16,7 @@ function loadall_phongchieu(){
     $re = pdo_query($sql);
     return $re;
 }
+function them_phong($name){
+    $sql = "insert into `phongchieu`(`name`) values ('$name')";
+    pdo_execute($sql);
+}
