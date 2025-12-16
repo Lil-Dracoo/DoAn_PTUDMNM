@@ -7,7 +7,8 @@ include "./model/taikhoan.php";
 include "./model/loai_phim.php";
 include "./model/phim.php";
 include "./model/phong.php";
-
+include "./model/lichchieu.php";
+include "./model/khunggio.php";
 
 // 2. XỬ LÝ ĐĂNG XUẤT (Ưu tiên xử lý đầu tiên)
 if (isset($_GET['act']) && $_GET['act'] == "dangxuat") {
@@ -63,7 +64,11 @@ if (isset($_SESSION['user1'])) {
             case "updatephong":
                 include "./controllers/c_phong.php";
                 break;
-
+            // --- MODULE SUẤT CHIẾU & THỜI GIAN ---
+            case "QLsuatchieu":
+            case "thoigian":
+                include "./controllers/c_suatchieu.php";
+                break;
             
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
             case "login":
