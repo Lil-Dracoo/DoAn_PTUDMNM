@@ -46,3 +46,11 @@ function update_loaiphim($id,$name){
     pdo_execute($sql);
 }
 
+function check_so_luong_phim_trong_loai($id_loai) {
+    $sql = "SELECT * FROM phim WHERE id_loai = " . $id_loai;
+    $ds_phim = pdo_query($sql);
+    
+    // Trả về số lượng phim đếm được
+    return count($ds_phim); 
+}
+
