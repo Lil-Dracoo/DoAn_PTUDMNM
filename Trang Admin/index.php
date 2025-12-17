@@ -68,6 +68,7 @@ if (isset($_SESSION['user1'])) {
             case "QTkh":
             case "QTvien":
             case "themuser":
+            case "xoatk":
                 include "./controllers/c_taikhoan.php";
                 break;
             

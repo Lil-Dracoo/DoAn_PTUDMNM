@@ -61,7 +61,7 @@ $role_hien_tai = isset($_SESSION['user1']['vai_tro']) ? $_SESSION['user1']['vai_
                                     <th>Tài khoản</th> 
                                     <th>Địa chỉ</th>
                                     <th class="text-center">Vai Trò</th>
-                                    <th class="text-center">Vé đã mua</th> 
+                                    <th class="text-center">Vé đã thanh toán</th> 
                                     <th class="text-right">Thao Tác</th>
                                 </tr>
                             </thead>

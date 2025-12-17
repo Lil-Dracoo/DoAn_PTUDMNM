@@ -74,5 +74,63 @@ switch ($act) {
         include "./view/taikhoan/them.php";
         break;
 
+    // 4. Xóa tài khoản
+    case "xoatk":
+        // --- 1. BẢO MẬT: CHẶN QUYỀN TRUY CẬP ---
+        if (!isset($_SESSION['user1']) || $_SESSION['user1']['vai_tro'] != 2) {
+            
+            // Thay vì include file có thể không tồn tại, ta chuyển hướng hoặc báo lỗi
+            echo "<script>alert('Cảnh báo: Bạn không có quyền thực hiện chức năng này!'); window.location.href='index.php';</script>";            
+            break; 
+        }
+
+        $vai_tro_can_xoa = isset($_GET['vai_tro']) ? $_GET['vai_tro'] : 0;
+        
+        if (isset($_GET['idxoa']) && $_GET['idxoa'] > 0) {
+            $id_xoa = $_GET['idxoa'];
+
+            if ($vai_tro_can_xoa == 0) { 
+                // --- TRƯỜNG HỢP 1: XÓA KHÁCH HÀNG ---
+                $so_ve_quan_trong = check_khach_hang_da_mua_ve($id_xoa); 
+                
+                if ($so_ve_quan_trong > 0) {
+                    $error = "Chặn xóa: Khách hàng này đã mua thành công $so_ve_quan_trong vé. Hãy khóa tài khoản thay vì xóa.";
+                } else {
+                    // Xóa dữ liệu rác trước
+                    pdo_execute("DELETE FROM ve WHERE id_tk = $id_xoa AND trang_thai = 0");
+                    // Kiểm tra lại tên cột id_user trong bảng binhluan cho đúng
+                    pdo_execute("DELETE FROM binhluan WHERE id_user = $id_xoa"); 
+                    
+                    xoa_tk($id_xoa);
+                    $suatc = "Đã xóa khách hàng thành công!";
+                }
+
+            } else {
+                // --- TRƯỜNG HỢP 2: XÓA NHÂN VIÊN / ADMIN ---
+                if ($_SESSION['user1']['id'] == $id_xoa) {
+                    $error = "Lỗi: Bạn không thể tự xóa tài khoản của chính mình!";
+                } elseif ($id_xoa == 1) { 
+                     $error = "Lỗi: Không thể xóa tài khoản Quản trị viên cấp cao!";
+                } else {
+                    xoa_tk($id_xoa);
+                    $suatc = "Đã xóa nhân viên thành công!";
+                }
+            }
+        }
+
+        // --- ĐIỀU HƯỚNG VỀ VIEW ---
+        // QUAN TRỌNG: Hãy kiểm tra kỹ thư mục của bạn là 'taikhoan' hay 'user'
+        // Nếu thư mục tên là 'user', hãy đổi 'taikhoan' thành 'user' ở 2 dòng dưới
+        
+        if ($vai_tro_can_xoa == 1) {
+            $loadalltk = loadall_taikhoan_nv(); 
+            // Nếu file này nằm trong view/user/QTvien.php thì sửa dòng dưới
+            include "./view/taikhoan/QTvien.php"; 
+        } else {
+            $loadall_kh1 = loadall_taikhoan(); 
+            // Nếu file này nằm trong view/user/khachhang.php thì sửa dòng dưới
+            include "./view/taikhoan/khachhang.php";
+        }
+        break;
 }
 ?>
