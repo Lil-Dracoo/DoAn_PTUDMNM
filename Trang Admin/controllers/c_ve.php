@@ -52,18 +52,21 @@ switch ($act) {
         break;
 
     case "capnhat_tt_ve":
-        if (isset($_POST['tk']) && ($_POST['tk'])) {
-            $searchName = $_POST['ten'];
-            $searchTieuDe = $_POST['tieude'];
-        } else {
-            $searchName = "";
-            $searchTieuDe = "";
-        }
-        if (isset($_POST['capnhat'])) {
-            capnhat_tt_ve();
-        }
-        $loadvephim = loadall_vephim1($searchName, $searchTieuDe);
-        include "./view/user/QTvien.php"; 
-        break;
+        capnhat_tt_ve();
+        echo "ĐÃ CHẠY capnhat_tt_ve";
+
+    if (isset($_POST['tk']) && ($_POST['tk'])) {
+        $searchName = $_POST['ten'];
+        $searchTieuDe = $_POST['tieude'];
+    } else {
+        $searchName = "";
+        $searchTieuDe = "";
+    }
+
+    $searchid = "";
+    $loadvephim = loadall_vephim1($searchName, $searchTieuDe, $searchid);
+
+    include "./view/vephim/ve.php";
+    break;
 }
 ?>

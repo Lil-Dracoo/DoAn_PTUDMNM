@@ -62,9 +62,11 @@ include "./view/home/sideheader.php";
                 <input type="text" class="tki2" name="id_ve" placeholder="tìm kiếm id vé">
                 <input type="submit" class="tkim" name="tk" value="Tìm Kiếm"></div>
     </div><!-- Page Headings End -->
-    <form action="index.php?act=capnhat_tt_ve" method="post">
-        <input type="submit" class="cap" value="Cập nhật vé hết hạn" name="capnhat">
-    <div class="row">
+            <a href="index.php?act=capnhat_tt_ve"
+                class="cap"
+                onclick="return confirm('Cập nhật trạng thái vé hết hạn?');">
+                Cập nhật vé hết hạn
+            </a>
 
         <!--Order List Start-->
         <div class="col-12">

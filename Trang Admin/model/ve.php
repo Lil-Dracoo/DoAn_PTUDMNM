@@ -41,7 +41,7 @@ function update_vephim($id,$trang_thai){
 function capnhat_tt_ve(){
     $sql = "UPDATE `ve`
     INNER JOIN `lichchieu` ON `ve`.`id_ngay_chieu` = `lichchieu`.`id`
-    SET `ve`.`trang_thai` = 4
-    WHERE `lichchieu`.`ngay_chieu` <= NOW() AND `ve`.`trang_thai` = 1;";
+    SET `ve`.`trang_thai` = 2
+    WHERE `lichchieu`.`ngay_chieu` < NOW() AND `ve`.`trang_thai` = 1;";
     pdo_execute($sql);
 }
