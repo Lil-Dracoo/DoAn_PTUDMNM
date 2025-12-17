@@ -64,6 +64,15 @@ if (isset($_SESSION['user1'])) {
                 include "./controllers/c_phong.php";
                 break;
 
+            // --- MODULE TÀI KHOẢN ---
+            case "QTkh":
+            case "QTvien":
+            case "themuser":
+            case "xoatk":
+            case "suatk":
+            case "updateuser":
+                include "./controllers/c_taikhoan.php";
+                break;
             
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
             case "login":
