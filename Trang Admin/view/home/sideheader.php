@@ -18,7 +18,7 @@
                                 <?php if ($_SESSION['user1']['vai_tro'] ==2){ ?>
                                 <?php } ?>
                                 <li><a href="index.php?act=QTkh"><i class="ti-shopping-cart"></i> <span>Khách Hàng</span></a></li>
-                              <?php if (isset($_SESSION['user1']) && ($_SESSION['user1']['vai_tro'] == 2 || $_SESSION['user1']['vai_tro'] == 1)): ?>
+                              <?php if (isset($_SESSION['user1']) && ($_SESSION['user1']['vai_tro'] == 2)): ?>
                         <li>
                             <a href="index.php?act=QTvien"><i class="zmdi zmdi-accounts"></i><span>Quản lý nhân viên</span></a></li>
                         <?php endif; ?>
