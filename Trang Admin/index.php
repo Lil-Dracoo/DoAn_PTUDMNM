@@ -67,6 +67,7 @@ if (isset($_SESSION['user1'])) {
             // --- MODULE TÀI KHOẢN ---
             case "QTkh":
             case "QTvien":
+            case "themuser":
                 include "./controllers/c_taikhoan.php";
                 break;
             

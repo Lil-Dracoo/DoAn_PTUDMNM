@@ -57,7 +57,14 @@ function dang_xuat(){
     unset($_SESSION['user']);
 }
 
-
+function insert_taikhoan($email,$user,$pass,$name,$sdt,$dc){
+    $sql="INSERT INTO `taikhoan` ( `email`, `user`, `pass`,`dia_chi`,`phone`,`name`,`vai_tro`) VALUES ( '$email', '$user','$pass','$dc','$sdt','$name','1'); ";
+    pdo_execute($sql);
+}
+function check_user($user){
+    $sql = "SELECT * FROM taikhoan WHERE user='".$user."'";
+    return pdo_query_one($sql);
+}
 
 
 
