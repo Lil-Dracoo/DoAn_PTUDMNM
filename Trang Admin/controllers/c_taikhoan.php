@@ -132,5 +132,77 @@ switch ($act) {
             include "./view/taikhoan/khachhang.php";
         }
         break;
+
+        // 5. Load form sửa tài khoản
+    case "suatk":
+        if (isset($_GET['idsua']) && $_GET['idsua'] > 0) {
+            $loadtk = loadone_taikhoan($_GET['idsua']);
+        }
+        include "./view/taikhoan/sua.php";
+        break;
+
+    // 6. Xử lý Cập nhật tài khoản
+    case "updateuser":
+        if (isset($_POST['capnhat'])) {
+            $id = $_POST['id'];
+            $name = trim($_POST['name']);
+            $user = trim($_POST['user']);
+            $pass = trim($_POST['pass']);
+            $email = trim($_POST['email']);
+            $phone = trim($_POST['phone']);
+            $dia_chi = trim($_POST['dia_chi']);
+            
+            // Lấy vai trò để biết đường redirect sau khi update
+            $vai_tro = isset($_POST['vai_tro']) ? $_POST['vai_tro'] : 0;
+
+            $errors = [];
+
+            // --- VALIDATE UPDATE ---
+            if (empty($name)) $errors[] = "Họ tên không được để trống.";
+            if (empty($user)) $errors[] = "Tên đăng nhập không được để trống.";
+            if (empty($pass)) $errors[] = "Mật khẩu không được để trống.";
+            if (empty($dia_chi)) $errors[] = "Địa chỉ không được để trống.";
+
+            if (empty($email)) {
+                $errors[] = "Email không được để trống.";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = "Email không đúng định dạng.";
+            }
+
+            if (empty($phone)) {
+                $errors[] = "SĐT không được để trống.";
+            } elseif (!preg_match('/^(03|05|07|08|09)+([0-9]{8})$/', $phone)) {
+                $errors[] = "SĐT không hợp lệ.";
+            }
+
+            // --- XỬ LÝ UPDATE ---
+            if (empty($errors)) {
+                // Update DB
+                sua_tk($id, $name, $user, $pass, $email, $phone, $dia_chi, $vai_tro);
+                $suatc = "Cập nhật thông tin thành công!";
+                
+                // --- PHÂN LUỒNG REDIRECT ---
+                // Nếu là Admin (vai_tro = 1) -> Về trang QTvien
+                if ($vai_tro == 1) {
+                    $loadalltk = loadall_taikhoan_nv();
+                    include "./view/taikhoan/QTvien.php";
+                } else {
+                    // Nếu là Khách (vai_tro = 0) -> Về trang Khách hàng
+                    $loadall_kh1 = loadall_taikhoan();
+                    include "./view/taikhoan/khachhang.php";
+                }
+
+            } else {
+                // Có lỗi -> Quay lại form Sửa, báo lỗi và điền lại dữ liệu cũ
+                $error = implode("<br>", $errors);
+                $loadtk = loadone_taikhoan($id); 
+                include "./view/taikhoan/sua.php";
+            }
+        } else {
+            // Trường hợp vào link trực tiếp mà không bấm nút update
+            $loadalltk = loadall_taikhoan_nv();
+            include "./view/taikhoan/QTvien.php";
+        }
+        break;
 }
 ?>

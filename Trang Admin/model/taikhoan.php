@@ -82,6 +82,10 @@ function check_khach_hang_da_mua_ve($id_user) {
     // Nếu kết quả là NULL (chưa mua gì) thì trả về 0, ngược lại trả về số lượng
     return isset($ketqua['tong_ve']) && $ketqua['tong_ve'] > 0 ? $ketqua['tong_ve'] : 0;
 }
+function sua_tk($id,$name,$user,$pass,$email,$sdt,$dc){
+    $sql = "update taikhoan set name ='".$name."', user ='".$user."',pass ='".$pass."',email ='".$email."',phone ='".$sdt."',dia_chi ='".$dc."' where id=".$id;
 
+    pdo_execute($sql);
+}
 
 
