@@ -4,10 +4,7 @@ session_start();
 // 1. INCLUDE MODELS (Load trước để dùng chung cho mọi trường hợp)
 include "./model/pdo.php";
 include "./model/taikhoan.php";
-<<<<<<< HEAD
 include "./model/ve.php";
-=======
->>>>>>> 89d5091570dca1e3c34e869768e76cfdb449bc5f
 include "./model/loai_phim.php";
 include "./model/phim.php";
 include "./model/phong.php";
@@ -41,7 +38,6 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
-<<<<<<< HEAD
             case "ve":
             case "suavephim":
             case "updatevephim":
@@ -50,8 +46,6 @@ if (isset($_SESSION['user1'])) {
             case "capnhat_tt_ve":
                 include "./controllers/c_ve.php";
                 break;
-=======
->>>>>>> 89d5091570dca1e3c34e869768e76cfdb449bc5f
             // --- MODULE PHIM ---
             case "QLphim":
             case "themphim":
