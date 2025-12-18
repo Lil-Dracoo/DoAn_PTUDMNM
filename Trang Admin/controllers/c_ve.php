@@ -31,17 +31,32 @@ switch ($act) {
         $ngayChieu = strtotime($loadve['ngay_chieu']);
         $homNay = strtotime(date('Y-m-d'));
         $thongBao = "";
-        // 1. Đang chờ → Hủy
-        if ($trangThaiCu == 0 && $trangThaiMoi == 2) {
-            $thongBao = "Vé chưa được thanh toán";
+        // 1. Kiểm tra trạng thái đóng (Đã dùng hoặc Đã hủy thì không cho làm gì nữa)
+        if ($trangThaiCu == 2) {
+            $thongBao = "Vé đã sử dụng, không thể chỉnh sửa.";
+        } 
+        elseif ($trangThaiCu == 3) {
+            $thongBao = "Vé đã bị hủy, không thể chỉnh sửa.";
+        } 
+        // 2. Kiểm tra trùng trạng thái
+        elseif ($trangThaiCu == $trangThaiMoi) {
+            $thongBao = "Trạng thái mới không được trùng với trạng thái cũ.";
         }
-        // 2. Chưa tới ngày chiếu → Đã dùng
-        if ($trangThaiMoi == 2 && $homNay < $ngayChieu) {
-            $thongBao = "Chưa đến thời gian sử dụng vé";
-        }
-        // 3. Đã thanh toán → Hủy
-        if ($trangThaiCu == 1 && $trangThaiMoi == 3) {
-            $thongBao = "Vé đã thanh toán, không hủy được";
+        // 3. Kiểm tra các ràng buộc logic khác
+            else {
+                // Đang chờ (0) muốn đổi sang trạng thái khác (giả sử 2 là dùng) mà chưa thanh toán
+                if ($trangThaiCu == 0 && $trangThaiMoi == 2) {
+                    $thongBao = "Vé chưa thanh toán, không thể chuyển sang Đã dùng.";
+                }
+                // Muốn đổi sang Đã dùng (2) nhưng chưa tới giờ chiếu
+                if ($trangThaiMoi == 2 && $homNay < $ngayChieu) {
+                    $thongBao = "Chưa đến giờ chiếu phim, không thể dùng vé.";
+                }
+                // Đã thanh toán (1) không cho phép hủy (3) - Tùy chính sách của bạn
+                if ($trangThaiCu == 1 && $trangThaiMoi == 3) {
+                    $thongBao = "Vé đã thanh toán thành công, không được phép hủy.";
+                }
+            }
         }
 
         // Có lỗi → quay lại trang sửa
