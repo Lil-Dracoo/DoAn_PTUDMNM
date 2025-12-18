@@ -22,23 +22,53 @@ switch ($act) {
         break;
 
     case "updatevephim":
-        if (isset($_POST['capnhat'])) {
-            $id = $_POST['id'];
-            $trang_thai = $_POST['trang_thai'];
-            update_vephim($id, $trang_thai);
+    if (isset($_POST['capnhat'])) {
+        $id = $_POST['id'];
+        $trangThaiMoi = $_POST['trang_thai'];
+        // Lấy trạng thái cũ + ngày chiếu từ DB
+        $loadve = loadone_vephim($id);
+        $trangThaiCu = $loadve['trang_thai'];
+        $ngayChieu = strtotime($loadve['ngay_chieu']);
+        $homNay = strtotime(date('Y-m-d'));
+        $thongBao = "";
+        // 1. Đang chờ → Hủy
+        if ($trangThaiCu == 0 && $trangThaiMoi == 2) {
+            $thongBao = "Vé chưa được thanh toán";
         }
-        if (isset($_POST['tk']) && ($_POST['tk'])) {
-            $searchName = $_POST['ten'];
-            $searchTieuDe = $_POST['tieude'];
-            $searchid = $_POST['id_ve'];
-        } else {
-            $searchName = "";
-            $searchTieuDe = "";
-            $searchid = "";
+        // 2. Chưa tới ngày chiếu → Đã dùng
+        if ($trangThaiMoi == 2 && $homNay < $ngayChieu) {
+            $thongBao = "Chưa đến thời gian sử dụng vé";
         }
-        $loadvephim = loadall_vephim1($searchName, $searchTieuDe, $searchid);
-        include "view/vephim/ve.php";
-        break;
+        // 3. Đã thanh toán → Hủy
+        if ($trangThaiCu == 1 && $trangThaiMoi == 3) {
+            $thongBao = "Vé đã thanh toán, không hủy được";
+        }
+
+        // Có lỗi → quay lại trang sửa
+        if ($thongBao != "") {
+            include "./view/vephim/sua.php";
+            break;
+        }
+
+        //  Hợp lệ → cập nhật
+        update_vephim($id, $trangThaiMoi);
+    }
+
+    // Load lại danh sách vé
+    if (isset($_POST['tk']) && ($_POST['tk'])) {
+        $searchName = $_POST['ten'];
+        $searchTieuDe = $_POST['tieude'];
+        $searchid = $_POST['id_ve'];
+    } else {
+        $searchName = "";
+        $searchTieuDe = "";
+        $searchid = "";
+    }
+
+    $loadvephim = loadall_vephim1($searchName, $searchTieuDe, $searchid);
+    include "./view/vephim/ve.php";
+    break;
+
 
     case "chitiethoadon":
         include "./view/vephim/chitiethoadon.php";
@@ -53,7 +83,6 @@ switch ($act) {
 
     case "capnhat_tt_ve":
         capnhat_tt_ve();
-        echo "ĐÃ CHẠY capnhat_tt_ve";
 
     if (isset($_POST['tk']) && ($_POST['tk'])) {
         $searchName = $_POST['ten'];
