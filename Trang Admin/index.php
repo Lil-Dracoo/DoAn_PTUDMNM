@@ -4,6 +4,7 @@ session_start();
 // 1. INCLUDE MODELS (Load trước để dùng chung cho mọi trường hợp)
 include "./model/pdo.php";
 include "./model/taikhoan.php";
+include "./model/ve.php";
 include "./model/loai_phim.php";
 include "./model/phim.php";
 include "./model/phong.php";
@@ -38,6 +39,14 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
+            case "ve":
+            case "suavephim":
+            case "updatevephim":
+            case "chitiethoadon":
+            case "ctve":
+            case "capnhat_tt_ve":
+                include "./controllers/c_ve.php";
+                break;
             // --- MODULE PHIM ---
             case "QLphim":
             case "themphim":
@@ -64,6 +73,7 @@ if (isset($_SESSION['user1'])) {
             case "updatephong":
                 include "./controllers/c_phong.php";
                 break;
+                
             // --- MODULE SUẤT CHIẾU & THỜI GIAN ---
             case "QLsuatchieu":
             case "thoigian":
@@ -76,6 +86,16 @@ if (isset($_SESSION['user1'])) {
             case "suathoigian":
             case "xoathoigian":
                 include "./controllers/c_suatchieu.php";
+                break;
+
+            // --- MODULE TÀI KHOẢN ---
+            case "QTkh":
+            case "QTvien":
+            case "themuser":
+            case "xoatk":
+            case "suatk":
+            case "updateuser":
+                include "./controllers/c_taikhoan.php";
                 break;
             
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
