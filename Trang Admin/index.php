@@ -4,6 +4,7 @@ session_start();
 // 1. INCLUDE MODELS (Load trước để dùng chung cho mọi trường hợp)
 include "./model/pdo.php";
 include "./model/taikhoan.php";
+include "./model/thongke.php";
 include "./model/ve.php";
 include "./model/loai_phim.php";
 include "./model/phim.php";
@@ -38,6 +39,14 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
+
+            case "DTdh":
+            case "DTthang":
+            case "DTtuan":
+            case "DTngay":
+                include "./controllers/c_thongke.php";
+                break;
+
             case "ve":
             case "suavephim":
             case "updatevephim":
