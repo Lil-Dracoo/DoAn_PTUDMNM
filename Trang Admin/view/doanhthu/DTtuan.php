@@ -13,7 +13,7 @@ $trang = ($tong > 0) ? ceil($tong/5) : 1;
         <!-- Page Heading Start -->
         <div class="col-12 col-lg-auto mb-20">
             <div class="page-heading">
-                <h3 class="title">Theo Dõi Danh Thu <span>/ Danh Thu Theo Tuần</span></h3>
+                <h3 class="title">Theo Dõi Doanh Thu <span>/ Doanh Thu Theo Tuần</span></h3>
             </div>
         </div><!-- Page Heading End -->
 
@@ -42,13 +42,17 @@ $trang = ($tong > 0) ? ceil($tong/5) : 1;
                         <?php foreach ($dtt as $list){
                             extract($list);
                                 if ($so_luong_ve_dat > 0) {
+                                // Format tuần: YYYYWW thành 'Tuần WW - Năm YYYY'
+                                $tuan_str = strval($tuan);
+                                $nam = substr($tuan_str, 0, 4);
+                                $tuan_so = (int)substr($tuan_str, 4);
                                 echo '<tr>
                                          <td>'.$id.'</td>
                                          <td>'.$tieu_de.'</td>
                                          <td>'.$ten_loaiphim.'</td>
-                                         <td>'.$tuan.'</td>
+                                         <td>Tuần '.$tuan_so.' - Năm '.$nam.'</td>
                                          <td>'.$so_luong_ve_dat.'</td>
-                                         <td>'.$sum_thanhtien.'</td>
+                                         <td>'.number_format($sum_thanhtien).' VNĐ</td>
                                          </tr>';
                                 }
                         } ?>
