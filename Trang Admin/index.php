@@ -5,6 +5,11 @@ session_start();
 include "./model/pdo.php";
 include "./model/taikhoan.php";
 include "./model/thongke.php";
+include "./model/ve.php";
+include "./model/loai_phim.php";
+include "./model/phim.php";
+include "./model/phong.php";
+
 
 // 2. XỬ LÝ ĐĂNG XUẤT (Ưu tiên xử lý đầu tiên)
 if (isset($_GET['act']) && $_GET['act'] == "dangxuat") {
@@ -24,6 +29,8 @@ if (isset($_SESSION['user1'])) {
 
     // Load dữ liệu cho Header
     $loadtk = loadall_taikhoan();
+    $loadloai = loadall_loaiphim();
+    $loadphim = loadall_phim();
 
     // Include Header
     include "./view/home/header.php";
@@ -32,12 +39,59 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
+
             case "DTdh":
             case "DTthang":
             case "DTtuan":
             case "DTngay":
                 include "./controllers/c_thongke.php";
                 break;
+
+            case "ve":
+            case "suavephim":
+            case "updatevephim":
+            case "chitiethoadon":
+            case "ctve":
+            case "capnhat_tt_ve":
+                include "./controllers/c_ve.php";
+                break;
+            // --- MODULE PHIM ---
+            case "QLphim":
+            case "themphim":
+            case "xoaphim":
+            case "suaphim":
+            case "updatephim":
+            case "QLcarou":
+                include "./controllers/c_phim.php";
+                break;
+            // --- MODULE LOẠI PHIM ---
+            case "QLloaiphim":
+            case "themloai":
+            case "xoaloai":
+            case "sualoai":
+            case "updateloai":
+                include "./controllers/c_loaiphim.php";
+                break;
+
+            // --- MODULE PHÒNG ---
+            case "phong":
+            case "themphong":
+            case "xoaphong":
+            case "suaphong":
+            case "updatephong":
+                include "./controllers/c_phong.php";
+                break;
+
+            // --- MODULE TÀI KHOẢN ---
+            case "QTkh":
+            case "QTvien":
+            case "themuser":
+            case "xoatk":
+            case "suatk":
+            case "updateuser":
+                include "./controllers/c_taikhoan.php";
+                break;
+            
             // Nếu đã đăng nhập mà cố vào login -> Đẩy về home
             case "login":
                 header('location: index.php?act=home');
