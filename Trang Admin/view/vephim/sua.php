@@ -47,8 +47,6 @@ if (is_array($loadve)) {
                             <option value="1" <?= ($trang_thai == 1) ? 'selected' : '' ?>>Xác nhận đã thanh toán</option>
                             <option value="2" <?= ($trang_thai == 2) ? 'selected' : '' ?>>Đã dùng</option>
                             <option value="3" <?= ($trang_thai == 3) ? 'selected' : '' ?>>Hủy</option>
-
-
                         </select>
                     </div>
 
@@ -60,6 +58,12 @@ if (is_array($loadve)) {
             </div>
 
             <h4 class="title">Thao tác</h4>
+            <?php if (isset($thongBao) && $thongBao != ""): ?>
+            <div style="color:red; margin:10px 0;">
+                <?= $thongBao ?>
+            </div>
+            <?php endif; ?>
+
 
             <div class="product-upload-gallery row flex-wrap">
 
@@ -67,7 +71,7 @@ if (is_array($loadve)) {
                 <!-- Button Group Start -->
                 <div class="row">
                     <div class="d-flex flex-wrap justify-content-end col mbn-10">
-                        <button class="button button-outline button-primary mb-10 ml-10 mr-0" type="submit" name="capnhat">Cập Nhật</button>
+                        <button class="button button-outline button-primary mb-10 ml-10 mr-0" type="submit" name="capnhat" >Cập Nhật</button>
                         <a href="index.php?act=thoigian"><button class="button button-outline button-info mb-10 ml-10 mr-0">Danh sách</button></a>
                     </div>
                 </div><!-- Button Group End -->
