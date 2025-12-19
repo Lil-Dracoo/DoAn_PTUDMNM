@@ -13,7 +13,7 @@ $trang = ($tong > 0) ? ceil($tong/5) : 1;
         <!-- Page Heading Start -->
         <div class="col-12 col-lg-auto mb-20">
             <div class="page-heading">
-                <h3 class="title">Theo Dõi Danh Thu <span>/ Danh Thu Theo Ngày</span></h3>
+                <h3 class="title">Theo Dõi Doanh Thu <span>/ Doanh Thu Theo Ngày</span></h3>
             </div>
         </div><!-- Page Heading End -->
 
@@ -47,7 +47,7 @@ $trang = ($tong > 0) ? ceil($tong/5) : 1;
                                          <td>'.$ten_loaiphim.'</td>
                                          <td>'.$ngay.'</td>
                                          <td>'.$so_luong_ve_dat.'</td>
-                                         <td>'.$sum_thanhtien.'</td>
+                                         <td>'.number_format($sum_thanhtien).' VNĐ</td>
                                          </tr>';
                             }
                         } ?>

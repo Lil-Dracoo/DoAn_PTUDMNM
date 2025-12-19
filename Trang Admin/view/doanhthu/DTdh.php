@@ -11,7 +11,7 @@ include "./view/home/sideheader.php";
         <!-- Page Heading Start -->
         <div class="col-12 col-lg-auto mb-20">
             <div class="page-heading">
-                <h3 class="title">Theo Dõi Danh Thu <span>/ Danh Thu </span></h3>
+                <h3 class="title">Theo Dõi Doanh Thu <span>/ Doanh Thu </span></h3>
             </div>
         </div><!-- Page Heading End -->
 
