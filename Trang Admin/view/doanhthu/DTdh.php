@@ -37,29 +37,19 @@ include "./view/home/sideheader.php";
                         <tbody>
                         <?php foreach ($dt as $list){
                             extract($list);
-
-                            // Kiểm tra nếu số lượng vé đặt không phải là 0
-                            echo '<tr>
+                            if ($so_luong_ve_dat > 0) {
+                                echo '<tr>
                                         <td>'.$id.'</td>
                                          <td>'.$tieu_de.'</td>
                                          <td>'.$ten_loaiphim.'</td>
                                          <td>'.$so_luong_ve_dat.'</td>
                                          <td>' . (isset($sum_thanhtien) ? number_format($sum_thanhtien) : 0) . ' VNĐ</td>
                                          </tr>';
-
+                            }
                         } ?>
 
 
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>id</th>
-                            <th>Phim</th>
-                            <th>Thể loại</th>
-                            <th>Số lượng vé đặt</th>
-                            <th>Doanh thu</th>
-                        </tr>
-                        </tfoot>
                     </table>
 
                 </div>
@@ -91,7 +81,9 @@ include "./view/home/sideheader.php";
                                 <?php
                                 foreach ($dt as $list) {
                                     extract($list);
-                                    echo "['$tieu_de', $so_luong_ve_dat],";
+                                    if ($so_luong_ve_dat > 0) {
+                                        echo "['$tieu_de', $so_luong_ve_dat],";
+                                    }
                                 }
                                 ?>
                             ]);

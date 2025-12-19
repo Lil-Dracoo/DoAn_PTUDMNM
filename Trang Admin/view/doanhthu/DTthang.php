@@ -1,7 +1,7 @@
 <?php
 include "./view/home/sideheader.php";
-$tong = count($dtt1);
-$trang = ceil($tong/4);
+$tong = !empty($dtt1) ? count($dtt1) : 0;
+$trang = ($tong > 0) ? ceil($tong/5) : 1;
 ?>
 
 <!-- Content Body Start -->
@@ -42,7 +42,7 @@ $trang = ceil($tong/4);
                         <?php foreach ($dtt as $list){
                             extract($list);
 
-                            // Kiểm tra nếu số lượng vé đặt không phải là 0
+                            if ($so_luong_ve_dat > 0) {
                                 echo '<tr>
                                                <td>'.$id.'</td>
                                          <td>'.$tieu_de.'</td>
@@ -51,36 +51,29 @@ $trang = ceil($tong/4);
                                          <td>'.$so_luong_ve_dat.'</td>
                                          <td>'.$sum_thanhtien.'</td>
                                          </tr>';
+                            }
 
                         } ?>
 
 
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>id</th>
-                            <th>Phim</th>
-                            <th>Thể loại</th>
-                            <th>Tháng</th>
-                            <th>Số lượng vé đặt</th>
-                            <th>Doanh thu</th>
-                        </tr>
-                        </tfoot>
                     </table>
+                    <?php if ($trang > 1): ?>
                     <ul class="pagination">
-
-<?php for($i=1 ; $i<=$trang ; $i++):?>
-     <?php if($_GET['trang']==$i){
- echo'<li class="page-item active" >
- <a class="page-link" href="index.php?act=DTthang&&trang='.$i.'">'.$i.'</a>
-</li>';
-}else{
-echo' <li class="page-item"><a class="page-link" href="index.php?act=DTthang&&trang='.$i.'">'.$i.'</a></li>';}
-?>
-<?php endfor?>
-
-</ul>
-</nav>
+                        <?php 
+                        $current_page = isset($_GET['trang']) ? (int)$_GET['trang'] : 1;
+                        for($i=1 ; $i<=$trang ; $i++):
+                            if($current_page == $i){
+                                echo'<li class="page-item active" >
+                                <a class="page-link" href="index.php?act=DTthang&&trang='.$i.'">'.$i.'</a>
+                                </li>';
+                            }else{
+                                echo' <li class="page-item"><a class="page-link" href="index.php?act=DTthang&&trang='.$i.'">'.$i.'</a></li>';
+                            }
+                        endfor;
+                        ?>
+                    </ul>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

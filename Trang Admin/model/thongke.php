@@ -66,7 +66,7 @@ function load_doanhthu_thang1(){
             LEFT JOIN ve ON ve.id_thoi_gian_chieu = khung_gio_chieu.id AND ve.trang_thai IN (1, 2,4)
             LEFT JOIN hoa_don ON hoa_don.id = ve.id_hd
             GROUP BY phim.id, thang
-            ORDER BY phim.id DESC, thang DESC LIMIT $vitri,$bghi;";
+            ORDER BY thang DESC, phim.id DESC LIMIT $vitri,$bghi;";
     $listtk = pdo_query($sql);
     return $listtk;
 }
@@ -84,8 +84,9 @@ function load_doanhthu_thang(){
             LEFT JOIN khung_gio_chieu ON lichchieu.id = khung_gio_chieu.id_lich_chieu
             LEFT JOIN ve ON ve.id_thoi_gian_chieu = khung_gio_chieu.id AND ve.trang_thai IN (1, 2,4)
             LEFT JOIN hoa_don ON hoa_don.id = ve.id_hd
-            GROUP BY phim.id, thang
-            ORDER BY phim.id DESC, thang DESC;";
+        WHERE hoa_don.thanh_tien > 0
+        GROUP BY phim.id, thang
+        ORDER BY thang DESC, phim.id DESC;";
     $listtk = pdo_query($sql);
   return $listtk;
 }
@@ -112,7 +113,7 @@ function load_doanhthu_tuan1(){
             INNER JOIN ve ON ve.id_thoi_gian_chieu = khung_gio_chieu.id AND ve.trang_thai IN (1, 2,4)
             INNER JOIN hoa_don ON hoa_don.id = ve.id_hd
             GROUP BY phim.id, phim.tieu_de, loaiphim.name, YEARWEEK(hoa_don.ngay_tt)
-            ORDER BY phim.id DESC, tuan DESC LIMIT $vitri,$bghi;";
+            ORDER BY tuan DESC, phim.id DESC LIMIT $vitri,$bghi;";
     $listtk = pdo_query($sql);
     return $listtk;
 }
@@ -131,7 +132,7 @@ function load_doanhthu_tuan(){
             INNER JOIN ve ON ve.id_thoi_gian_chieu = khung_gio_chieu.id AND ve.trang_thai IN (1, 2,4)
             INNER JOIN hoa_don ON hoa_don.id = ve.id_hd
             GROUP BY phim.id, phim.tieu_de, loaiphim.name, YEARWEEK(hoa_don.ngay_tt)
-            ORDER BY phim.id DESC, tuan DESC ;";
+            ORDER BY tuan DESC, phim.id DESC ;";
   $listtk = pdo_query($sql);
   return $listtk;
 }
@@ -159,7 +160,7 @@ function load_doanhthu_ngay1(){
             INNER JOIN ve ON ve.id_thoi_gian_chieu = khung_gio_chieu.id AND ve.trang_thai IN (1, 2,4)
             INNER JOIN hoa_don ON hoa_don.id = ve.id_hd
             GROUP BY phim.id, phim.tieu_de, loaiphim.name, DATE(hoa_don.ngay_tt)
-            ORDER BY phim.id DESC, ngay DESC LIMIT $vitri,$bghi;";
+            ORDER BY ngay DESC, phim.id DESC LIMIT $vitri,$bghi;";
     $listtk = pdo_query($sql);
     return $listtk;
 }
@@ -178,7 +179,7 @@ function load_doanhthu_ngay(){
             INNER JOIN ve ON ve.id_thoi_gian_chieu = khung_gio_chieu.id AND ve.trang_thai IN (1, 2,4)
             INNER JOIN hoa_don ON hoa_don.id = ve.id_hd
             GROUP BY phim.id, phim.tieu_de, loaiphim.name, DATE(hoa_don.ngay_tt)
-            ORDER BY phim.id DESC, ngay DESC;";
+            ORDER BY ngay DESC, phim.id DESC;";
     $listtk = pdo_query($sql);
     return $listtk;
 }
