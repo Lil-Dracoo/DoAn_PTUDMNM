@@ -40,8 +40,13 @@ function update_vephim($id,$trang_thai){
 }
 function capnhat_tt_ve(){
     $sql = "UPDATE `ve`
-    INNER JOIN `lichchieu` ON `ve`.`id_ngay_chieu` = `lichchieu`.`id`
-    SET `ve`.`trang_thai` = 2
-    WHERE `lichchieu`.`ngay_chieu` < NOW() AND `ve`.`trang_thai` = 1;";
+        INNER JOIN `lichchieu` ON `ve`.`id_ngay_chieu` = `lichchieu`.`id`
+        SET `ve`.`trang_thai` = CASE
+            WHEN `ve`.`trang_thai` = 1 AND `lichchieu`.`ngay_chieu` < NOW() THEN 2
+            WHEN `ve`.`trang_thai` = 0 AND `lichchieu`.`ngay_chieu` < NOW() THEN 3
+            ELSE `ve`.`trang_thai`
+        END
+        WHERE `lichchieu`.`ngay_chieu` < NOW()
+        AND `ve`.`trang_thai` IN (0,1);";
     pdo_execute($sql);
 }
