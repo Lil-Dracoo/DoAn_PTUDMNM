@@ -15,8 +15,8 @@
         <?php }else{
             echo '<h1>Chào mừng '.$_SESSION['user1']['name'].' đến với trang làm việc của CinePass</h1>';
         } ?>
-    </div>
-    <?php include "../baocao.php"?></div><script>
+        <h1> <?php include "./baocao.php"?></h1>
+    </div></div><script>
     function updateClock() {
         var currentTime = new Date();
         var hours = currentTime.getHours();
