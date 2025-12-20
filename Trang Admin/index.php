@@ -39,7 +39,6 @@ if (isset($_SESSION['user1'])) {
     if (isset($_GET['act'])) {
         $act = $_GET['act'];
         switch ($act) {
-
             case "DTdh":
             case "DTthang":
             case "DTtuan":
@@ -96,11 +95,10 @@ if (isset($_SESSION['user1'])) {
             case "login":
                 header('location: index.php?act=home');
                 break;
-
+                
             // Trang chủ
             case "home":
             default:
-                
                 include "./view/home.php";
                 break;
         }
